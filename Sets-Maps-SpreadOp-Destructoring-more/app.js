@@ -55,8 +55,6 @@
 
 // console.log(persons, copiedPersons);
 
-// *****************************************************************************************************
-
 // DESTRUCTORING
 // const nameData = ["Max", "Lolman", "Mr", 30];
 // // const firstName = nameData[0];
@@ -65,4 +63,3 @@
 // const [firstName, lastName, ...otherInformation] = nameData; // this ... is the rest operator not spread one
 // console.log(firstName, lastName, otherInformation);
 
-// MAPS & SETS
