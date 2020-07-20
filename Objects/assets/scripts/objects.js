@@ -3,6 +3,53 @@ const searchBtn = document.getElementById("search-btn");
 
 const movies = [];
 
+const renderMovies = (filter = "") => {
+  const movieList = document.getElementById("movie-list");
+
+  if (movies.length === 0) {
+    movieList.classList.remove("visible");
+    return;
+  } else {
+    movieList.classList.add("visible");
+  }
+  movieList.innerHTML = "";
+
+  const filteredMovies = !filter
+    ? movies
+    : movies.filter((movie) => movie.info.title.includes(filter));
+
+  filteredMovies.forEach((movie, idx, movies) => {
+    const movieEl = document.createElement("li");
+
+    // These two are the same, check info exist in movie
+    if(!('info' in movie)) {
+      // if needed
+    }
+    if(movie.info === undefined) {
+      // if needed
+    }
+
+    const { info, ...otherProps } = movie; // object destructoring + rest parameter
+    console.log(otherProps);
+    const { title: movieTitle } = info;
+    let text = movieTitle + " - ";
+    for (const key in info) {
+      // look below *
+      if (key !== "title") {
+        // text = text + `${key}: ${movie.info[key]}`;
+        text = text + `${key}: ${info[key]}`;
+      }
+    }
+    movieEl.textContent = text;
+    movieList.append(movieEl);
+
+    // movieEl.textContent = movie.info.title;
+    // let text = movie.info.title + " - ";
+    // let text = info.title + " - ";
+    // for (const key in movie.info) {
+  });
+};
+
 const addMovieHandler = () => {
   const title = document.getElementById("title").value;
   const extraName = document.getElementById("extra-name").value;
@@ -21,14 +68,30 @@ const addMovieHandler = () => {
       title, // title: title
       [extraName]: extraValue,
     },
-    id: Math.random()
+    id: Math.random().toString(),
   };
 
   movies.push(newMovie);
-  console.log(newMovie);
+  renderMovies();
 };
 
-addMovieBtn.addEventListener('click', addMovieHandler);
+const searchMovieHandler = () => {
+  const filterTerm = document.getElementById("filter-title").value;
+  renderMovies(filterTerm);
+};
+
+addMovieBtn.addEventListener("click", addMovieHandler);
+searchBtn.addEventListener("click", searchMovieHandler);
+
+/* *
+ here 'title' is the key that is also a string, just title wont work
+ because it will search for a variable named title but there is none here
+ so key would use the title property also, becasue the check would not matter
+ keys get coerced to string
+*/
+
+// ----------------------------------------------------------------------------------------------
+// **********************************************************************************************
 
 // const movieList = document.getElementById("movie-list");
 
