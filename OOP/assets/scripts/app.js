@@ -200,3 +200,7 @@ class App {
 }
 
 App.init();
+
+// Object Descriptors
+// Accessing const myObj = Object. we can set enumerable (for iteration) and other property so
+// that we avoid doing checks in iterations or that a property can get delete
