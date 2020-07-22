@@ -66,29 +66,37 @@ class ShoppingCart extends Component {
   }
 
   constructor(renderHookId) {
-    super(renderHookId); // calls the constructor in the parent class, must be first here
+    super(renderHookId, false); // calls the constructor in the parent class, must be first here
+    this.orderProducts = () => {
+      console.log("Ordering..."); // ^+^
+      console.log(this.items); // ^+^
+    }
+    this.render(); // ^+^
   }
 
   addProduct(product) {
     const updatedItems = [...this.items];
     updatedItems.push(product);
     this.cartItems = updatedItems;
-
-    // This was fine, changed just to show get and set use
-    // this.items.push(product);
-    // this.totalOutput.innerHTML = `<h2>Total: \$${1}</h2>`;
   }
 
+  // *-*
+  // orderProducts() {
+  //   console.log("Ordering...");
+  //   console.log(this.items);
+  // }
+
   render() {
-    // const cartEl = document.createElement("section");
     const cartEl = this.createRootElement("section", "cart");
     cartEl.innerHTML = `
       <h2>Total: \$${0}</h2>
       <button>Order Now!</button>
     `;
-    // cartEl.className = "cart";
+    const orderButton = cartEl.querySelector("button");
+    // orderButton.addEventListener("click", () => this.orderProducts()); // do this, is less code
+    // orderButton.addEventListener("click", () => this.orderProducts()); // *-* or this but still is more code 
+    orderButton.addEventListener("click", this.orderProducts); // ^+^ this require to add orderProducts in the constructor and call render()
     this.totalOutput = cartEl.querySelector("h2");
-    // return cartEl;
   }
 }
 
@@ -101,14 +109,9 @@ class ProductItem extends Component {
 
   addToCart() {
     App.addProductToCart(this.product);
-
-    // console.log("Adding product to cart...");
-    // console.log(this.product);
   }
 
   render() {
-    // const prodEl = document.createElement("li");
-    // prodEl.className = "product-item";
     const prodEl = this.createRootElement("li", "product-item");
     prodEl.innerHTML = `
         <div>
@@ -123,20 +126,20 @@ class ProductItem extends Component {
       `;
     const addCartButton = prodEl.querySelector("button");
     addCartButton.addEventListener("click", this.addToCart.bind(this)); // without bind(this) we get undefined
-    // return prodEl;
   }
 }
 
 class ProductList extends Component {
-  products = [];
+  #products = [];
 
   constructor(renderHookId) {
-    super(renderHookId);
-    this.fetchProducts();
+    super(renderHookId, false);
+    this.render();
+    this.#fetchProducts();
   }
 
-  fetchProducts() {
-    this.products = [
+  #fetchProducts() {
+    this.#products = [
       new Product(
         "A Pillow",
         "https://www.downetc.com/media/catalog/product/cache/4c0ee9c259e8813fe6f171ce41105c1f/g/o/goose_down_pillow_rhapsody.jpg",
@@ -154,7 +157,7 @@ class ProductList extends Component {
   }
 
   renderProducts() {
-    for (const prod of this.products) {
+    for (const prod of this.#products) {
       new ProductItem(prod, "prod-list");
     }
   }
@@ -164,21 +167,10 @@ class ProductList extends Component {
       new ElementAttribute("id", "prod-list"),
     ]);
 
-    if (this.products && this.products.length > 0) {
+    if (this.#products && this.#products.length > 0) {
       this.renderProducts();
     }
-
-    // const renderHook = document.getElementById("app");
-    // const prodList = document.createElement("ul");
-    // prodList.id = "prod-list";
-    // prodList.className = "product-list";
-
-    //const productItem = new ProductItem(prod, "prod-list");
-    // productItem.render();
-    // const prodEl = productItem.render();
-    // prodList.append(prodEl);
   }
-  // return prodList;
 }
 
 class Shop {
@@ -191,16 +183,6 @@ class Shop {
   render() {
     this.cart = new ShoppingCart("app");
     new ProductList("app");
-
-    // this.cart = new ShoppingCart("app");
-    // const productList = new ProductList('app');
-
-    // const renderHook = document.getElementById("app");
-    // const cartEl = this.cart.render();
-    // this.cart.render();
-    // productList.render();
-    // renderHook.append(cartEl);
-    // renderHook.append(prodListEl);
   }
 }
 
@@ -209,7 +191,6 @@ class App {
 
   static init() {
     const shop = new Shop();
-    // shop.render();
     this.cart = shop.cart;
   }
 
