@@ -1,3 +1,66 @@
+// NUMBERS & STRINGS
+
+function randomIntBetween(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min); // random() gives a random n between 0 and 0.999999....
+  // floor is for the + 1 -> 10,9999 -> 10
+}
+console.log(randomIntBetween(1, 10));
+
+// Tagged template
+
+function productDescription(strings, productName, productPrice) {
+  console.log(strings);
+  console.log(productName);
+  console.log(productPrice);
+
+  let priceCategory = 'pretty cheap';
+  if (productPrice > 20) {
+    priceCategory = 'fairly priced';
+  }
+  return `${strings[0]}${productName}${strings[1]}${priceCategory}${string[2]}`;
+  // return { name: productName, price: productPrice }; // Can also just return an object and lose the string part
+}
+
+const prodName = 'Javascript Course';
+const prodPrice = 29.99;
+
+const productOutput = productDescription`This product (${prodName}) is ${prodPrice}`;
+
+console.log(productOutput);
+
+// Regex (regular expression)
+
+// const regex = new RegExp('/^\S+@\S+\.\S+$/'); // email regex
+const regex = /^\S+@\S+\.\S+$/; // email regex (use this way)
+const userInput = 'testtest.com';
+
+regex.test(userInput); // false
+regex.test('test@test.com'); // true;
+
+const regex2 = /hello/; // case sensitive
+regex2.test('hello'); // true
+regex2.test('hi there, hello'); // true
+
+regex2.test('Hello'); // false
+
+const regex3 = /(h|H)ello/; // care unsensitive for h
+regex3.test('Hello'); // true
+
+const regex4 = /.ello/; // wildcard
+regex4.test('hello'); // true
+regex4.test('ello'); // false
+regex4.test('Jello'); // true
+regex4.test('     Jello'); // true
+
+// For others check google
+
+regex4.exec('jello'); // return an object with many info, for example, index tell you where the pattern is met
+'hi jello'.match(regex4); // same
+
+//*********************************************************************************************************************
+
+// ADVANCED FUNCTIONS
+
 // Pure function
 function add(num1, num2) {
   return num1 + num2;
