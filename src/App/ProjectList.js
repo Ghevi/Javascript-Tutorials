@@ -1,15 +1,16 @@
-import { ProjectItem as PrjItem } from './ProjectItem.js';
-import * as DOMH from '../Utility/DOMHelper.js';
+import { ProjectItem as PrjItem } from './ProjectItem';
+import * as DOMH from '../Utility/DOMHelper';
 
 // console.log(DEFAULT_VALUE);
 // console.log(window.DEFAULT_VALUE); // must be move inside the class*
 console.log(this); // This time we get undefined not window, because modules use strict mode
 
 export class ProjectList {
-  projects = [];
+  // projects = []; // for webpack we comment out this
 
   constructor(type) {
     this.type = type;
+    this.projects = [];
     const prjItems = document.querySelectorAll(`#${type}-projects li`);
     for (const prjItem of prjItems) {
       this.projects.push(
@@ -21,7 +22,7 @@ export class ProjectList {
   }
 
   connectDroppable() {
-    console.log(window.DEFAULT_VALUE); // *
+    // console.log(window.DEFAULT_VALUE); // *
     const list = document.querySelector(`#${this.type}-projects ul`);
 
     list.addEventListener('dragenter', (event) => {

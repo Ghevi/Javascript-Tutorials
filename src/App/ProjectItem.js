@@ -1,11 +1,12 @@
-import { DOMHelper } from '../Utility/DOMHelper.js';
-// import { Tooltip } from './Tooltip.js';
+import { DOMHelper } from '../Utility/DOMHelper';
+// import { Tooltip } from './Tooltip';
 
 export class ProjectItem {
-  hasActiveTooltip = false;
+  // hasActiveTooltip = false;
 
   constructor(id, updateProjectListsFunction, type) {
     this.id = id;
+    this.hasActiveTooltip = false;
     this.updateProjectListsHandler = updateProjectListsFunction;
     this.connectMoreInfoButton();
     this.connectSwitchButton(type);
@@ -20,7 +21,7 @@ export class ProjectItem {
     const tooltipText = projectElement.dataset.extraInfo;
 
     // Dynamic import
-    import('./Tooltip.js').then((module) => {
+    import('./Tooltip').then((module) => {
       const tooltip = new module.Tooltip(
         () => {
           this.hasActiveTooltip = false;
