@@ -1,7 +1,11 @@
+import * as _ from 'lodash/array';
+
 import { ProjectList } from './App/ProjectList';
 
-window.DEFAULT_VALUE = 'HELLO';
-globalThis.DEFAULT_VALUE1 = 'HELLO1';
+// window.DEFAULT_VALUE = 'HELLO';
+// globalThis.DEFAULT_VALUE1 = 'HELLO1';
+
+console.log(_.difference([0, 1], [1, 2]));
 
 class App {
   static init() {
