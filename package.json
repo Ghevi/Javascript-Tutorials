@@ -1,0 +1,22 @@
+{
+  "name": "events-01-starting-setup",
+  "version": "1.0.0",
+  "description": "Javascript - Tooling",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ghevi/Javascript-Tutorials.git"
+  },
+  "author": "Ghevi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ghevi/Javascript-Tutorials/issues"
+  },
+  "homepage": "https://github.com/Ghevi/Javascript-Tutorials#readme",
+  "devDependencies": {
+    "eslint": "^7.6.0"
+  }
+}
